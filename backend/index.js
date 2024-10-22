@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoute from './routes/authRoutes.js';
 import cookieParser from "cookie-parser";
+import userRoute from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -28,3 +29,4 @@ app.listen(PORT, () => {
 
 
 app.use('/api/auth', authRoute);
+app.use("/api/user", userRoute);

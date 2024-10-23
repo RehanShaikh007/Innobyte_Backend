@@ -50,3 +50,23 @@ export const updateProduct = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteProduct = async(req, res, next) => {
+   try {
+     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+
+     if(!deletedProduct){
+      return next(errorHandler(404, 'Product Not Found!'));
+     }
+
+     res.status(200).json({
+      message: 'Product Deleted Successfully!',
+      product: deletedProduct.name,
+    });
+   } catch (error) {
+      if(error.kind === 'ObjectId'){
+        return next(errorHandler(400, 'Invalid Product ID'));
+      }
+      next(error);
+   }
+}

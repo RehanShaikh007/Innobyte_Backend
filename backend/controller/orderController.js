@@ -66,3 +66,26 @@ export const viewSingleOrder = async (req, res, next) => {
         next(error);
     }
 }
+
+
+export const cancelOrder = async (req, res, next) => {
+    try {
+        const order = await Order.findById(req.params.id);
+
+        if(!order){
+            return next(errorHandler(402, 'Order Not Found!'));
+        }
+
+        if(req.user.role !== 'admin' && order.userId.toString() !== req.user.id){
+            return next(errorHandler(403, 'UnAuthorized Access'));
+        }
+         
+        await Order.findByIdAndDelete(req.params.id);
+        res.status(201).json({
+           message:'Order Cancelled Successfully!', 
+           order,
+        });
+    } catch (error) {
+        next(error);
+    }
+}

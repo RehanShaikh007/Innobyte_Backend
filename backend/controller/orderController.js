@@ -48,3 +48,21 @@ export const viewOrders = async(req, res, next) => {
         next(error);
     }
 }
+
+export const viewSingleOrder = async (req, res, next) => {
+    try {
+        const order = await Order.findById(req.params.id);
+
+        if(!order){
+            return next(errorHandler(400, 'Order Not Found!'));
+        }
+
+        if(req.user.role !== 'admin' && order.userId.toString() !== req.user.id){
+            return next(errorHandler(401, 'UnAuthorized Access'));
+        }
+
+        res.status(201).json(order);
+    } catch (error) {
+        next(error);
+    }
+}

@@ -2,7 +2,7 @@ import Product from "../model/productMode.js";
 import {errorHandler} from "../utils/error.js";
 import Order from "../model/orderModel.js";
 
-export const plcaeOrder = async(req, res, next) => {
+export const placeOrder = async(req, res, next) => {
     try {
         const {userId, products, shippingAddress, paymentMethod} = req.body;
 
@@ -28,6 +28,22 @@ export const plcaeOrder = async(req, res, next) => {
             message: 'Order Placed Successfully!',
             newOrder
         });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const viewOrders = async(req, res, next) => {
+    try {
+        let orders;
+        if(req.user.role === 'admin'){
+            orders = await Order.find();
+        }
+
+        else {
+            orders = await Order.find({userId: req.user.id});
+        }
+        res.status(201).json(orders);
     } catch (error) {
         next(error);
     }

@@ -80,3 +80,18 @@ export const listProducts = async(req, res,next) => {
      next(error);
   }
 };
+
+
+export const viewProduct = async(req, res, next) => {
+   try {
+      const product = await Product.findById(req.params.id);
+
+      if(!product){
+        return next(errorHandler(404, 'Product not Found!'));
+      }
+
+      res.status(200).json(product);
+   } catch (error) {
+      next(error);
+   }
+}

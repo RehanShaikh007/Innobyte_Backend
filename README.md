@@ -4,15 +4,15 @@ This is the backend for the Innobyte Ecommerce application, built using the MERN
 
 ## Table of Contents
 
-- Installation
-- Environment Variables
-- API Endpoints
-  - Auth Routes
-  - User Routes
-  - Product Routes
-  - Order Routes
-- Middleware
-- Technologies Used
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [API Endpoints](#api-endpoints)
+  - [Auth Routes](#auth-routes)
+  - [User Routes](#user-routes)
+  - [Product Routes](#product-routes)
+  - [Order Routes](#order-routes)
+- [Middleware](#middleware)
+- [Technologies Used](#technologies-used)
 
 ## Installation
 

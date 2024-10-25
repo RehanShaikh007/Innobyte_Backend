@@ -62,7 +62,7 @@ export const signOut = async (req, res, next) => {
       if (req.user && req.user.role === 'admin') {
           res.status(200).json('Admin Logged Out Successfully!');
       } else {
-          res.status(200).json('User Logged Out Successfully!!');
+          res.status(200).json('User Logged Out Successfully!');
       }
 
   } catch (error) {

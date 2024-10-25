@@ -48,9 +48,9 @@ PORT=5000
 ## API Endpoints
 
 ### Auth Routes
-These endpoints handle user authentication (signup, signin).
+These endpoints handle user & admin authentication (signup, signin, signout).
 
-1. Sign Up User
+1. SignUp
    - URL: /api/auth/signup
    - Method: POST
    - Request Body:
@@ -67,7 +67,7 @@ These endpoints handle user authentication (signup, signin).
     ``` bash
     "User created Successfully!"
     ```
-2. Sign In User
+2. SignIn
    - URL: /api/auth/signin
    - Method: POST
    - Request Body:
@@ -89,6 +89,14 @@ These endpoints handle user authentication (signup, signin).
     "updatedAt": "date,time"
     }
     ```
+3. SignOut
+   - URL: /api/auth/signout
+   - Method: GET
+   - Response:
+     - Success: 200 OK
+    ``` bash
+     "User Logged Out Successfully!!"
+    ```
 ### User Routes
 
 1. Get User
@@ -108,7 +116,7 @@ These endpoints handle user authentication (signup, signin).
     ```
 
 2. Update User
-   - URL: /api/user/:id
+   - URL: /api/user/update/:id
    - Method: PUT
    - Request Body:
    ``` bash
@@ -250,9 +258,7 @@ These endpoints handle user authentication (signup, signin).
     ``` bash
     {
       "message": "Product Deleted Successfully!",
-      "product": {
-         "name": "product_name"
-      },
+      "product":  "product_name"
     }
     ```
 ### Order Routes

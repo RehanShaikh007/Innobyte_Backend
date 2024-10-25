@@ -280,6 +280,7 @@ These endpoints handle user authentication (signup, signin).
     ``` bash
     {
       "message": "Order Placed Successfully!",
+    "newOrder":{
       "userId": "userId",
       "products":
      [
@@ -290,7 +291,11 @@ These endpoints handle user authentication (signup, signin).
      ],
     "totalPrice": 1000,
     "shippingAddress": "123 Main St",
-    "paymentMethod": "Credit Card"
+    "paymentMethod": "Credit Card",
+     "orderStatus": "Pending",
+      "_id": "orderId",
+      "createdAt": "Date,Time",
+    }
     }
     ```
     
@@ -307,9 +312,14 @@ These endpoints handle user authentication (signup, signin).
     "userId": "userId",
     "products": [...],
     "totalPrice": 200,
-    "status": "pending"
+    "shippingAddress": "yourAddress",
+    "paymentMethod": "Cash on Delivery",
+    "orderStatus": "pending",
+    "createdAt": "Date,Time"
    },
+    {
    ...
+    },
    ]
     ```
 3. View Single Order 
@@ -319,16 +329,16 @@ These endpoints handle user authentication (signup, signin).
    - Response:
      - Success: 201 Created
     ``` bash
-      [
    {
     "_id": "orderId",
     "userId": "userId",
     "products": [...],
     "totalPrice": 200,
-    "status": "pending"
-   },
-   ...
-   ]
+    "shippingAddress": "yourAddress",
+    "paymentMethod": "Cash on Delivery",
+    "orderStatus": "pending",
+    "createdAt": "Date,Time"
+   }
     ```
     
 4. Cancel Order 
@@ -336,9 +346,20 @@ These endpoints handle user authentication (signup, signin).
    - Method: DELETE
    - Description: Cancels an order. Accessible by users (for their orders) and admins.
    - Response:
-     - Success: 200 OK
+     - Success: 201 Created
     ``` bash
-   "Order cancelled successfully!"
+   {
+    "message": "Order Cancelled Successfully!",
+    "order": {
+        "_id": "orderId",
+        "userId": "yourId",
+        "products": [...],
+        "totalPrice": 1600,
+        "shippingAddress": "yourAddress",
+        "paymentMethod": "Cash on Delivery",
+        "createdAt": "Date,Time"
+    }
+   }
     ```
 
 ## Middleware

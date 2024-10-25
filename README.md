@@ -1,6 +1,6 @@
 # Innobyte Ecommerce Backend
 
-### This is the backend for the Innobyte Ecommerce application, built using the MERN stack (MongoDB, Express, React, and Node.js). It handles user authentication, product management, and order processing.
+This is the backend for the Innobyte Ecommerce application, built using the MERN stack (MongoDB, Express, React, and Node.js). It handles user authentication, product management, and order processing.
 
 ## Table of Contents
 
@@ -255,4 +255,101 @@ These endpoints handle user authentication (signup, signin).
       },
     }
     ```
+### Order Routes
+
+1. Place Order 
+   - URL: /api/orders
+   - Method: POST
+   - Description: Places a new order. Accessible by users.
+   - Request Body:
+   ``` bash
+   {
+   "userId": "userId",
+   "products": [
+    {
+      "productId": "productId",
+      "quantity": 2
+    }
+   ],
+   "shippingAddress": "123 Main St",
+   "paymentMethod": "Credit Card"
+   }
+    ```
+   - Response:
+     - Success: 201 Created
+    ``` bash
+    {
+      "message": "Order Placed Successfully!",
+      "userId": "userId",
+      "products":
+     [
+      {
+      "productId": "productId",
+      "quantity": 2
+      }
+     ],
+    "totalPrice": 1000,
+    "shippingAddress": "123 Main St",
+    "paymentMethod": "Credit Card"
+    }
+    ```
+    
+2. View Order History 
+   - URL: /api/orders
+   - Method: GET
+   - Description: Fetches the order history for a user. Accessible by both users and admins.
+   - Response:
+     - Success: 201 Created
+    ``` bash
+    [
+   {
+    "_id": "orderId",
+    "userId": "userId",
+    "products": [...],
+    "totalPrice": 200,
+    "status": "pending"
+   },
+   ...
+   ]
+    ```
+3. View Single Order 
+   - URL: /api/orders/:id
+   - Method: GET
+   - Description: Fetches a single order by its ID.
+   - Response:
+     - Success: 201 Created
+    ``` bash
+      [
+   {
+    "_id": "orderId",
+    "userId": "userId",
+    "products": [...],
+    "totalPrice": 200,
+    "status": "pending"
+   },
+   ...
+   ]
+    ```
+    
+4. Cancel Order 
+   - URL: /api/orders/:id
+   - Method: DELETE
+   - Description: Cancels an order. Accessible by users (for their orders) and admins.
+   - Response:
+     - Success: 200 OK
+    ``` bash
+   "Order cancelled successfully!"
+    ```
+
+## Middleware
+- **Authentication Middleware** (verifyToken): Ensures the user is authenticated.
+- **Admin Middleware** (verifyAdmin): Grants access to admin-only routes.
+
+## Technologies Used
+- **Node.js:** JavaScript runtime for server-side logic.
+- **Express.js:** Web framework for building the backend.
+- **MongoDB:** NoSQL database for storing user, product, and order data.
+- **Mongoose:** ODM for MongoDB.
+- **JWT (JSON Web Tokens):** Used for secure authentication.
+- **bcryptjs:** For hashing user passwords.
 

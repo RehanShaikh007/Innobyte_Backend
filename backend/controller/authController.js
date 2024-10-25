@@ -42,8 +42,30 @@ export const signin = async (req, res, next) => {
 
     const { password: pass, ...rest } = validUser._doc;
 
-    res.cookie("access_token", token, { httpOnly: true }).status(200).json(rest);
+    res.cookie('access_token', token, {
+      httpOnly: true
+    }).status(200).json(rest);
   } catch (error) {
     next(error);
+  }
+};
+
+
+export const signOut = async (req, res, next) => {
+  try {
+      res.cookie('access_token',"", {
+          httpOnly: true,
+          expires: new Date(Date.now()),
+      });
+
+
+      if (req.user && req.user.role === 'admin') {
+          res.status(200).json('Admin Logged Out Successfully!');
+      } else {
+          res.status(200).json('User Logged Out Successfully!!');
+      }
+
+  } catch (error) {
+      next(error);
   }
 };

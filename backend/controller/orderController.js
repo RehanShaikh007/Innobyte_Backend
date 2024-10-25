@@ -51,6 +51,7 @@ export const viewOrders = async(req, res, next) => {
 
 export const viewSingleOrder = async (req, res, next) => {
     try {
+        const orderId = req.params.id.trim();
         const order = await Order.findById(req.params.id);
 
         if(!order){
@@ -63,6 +64,9 @@ export const viewSingleOrder = async (req, res, next) => {
 
         res.status(201).json(order);
     } catch (error) {
+        if (error.name === 'CastError') {
+            return next(errorHandler(400, 'Invalid order ID format'));
+          }
         next(error);
     }
 }
